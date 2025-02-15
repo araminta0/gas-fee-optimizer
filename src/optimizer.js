@@ -1,11 +1,13 @@
 const axios = require('axios');
 const cron = require('node-cron');
+const GasAnalyzer = require('./analyzer');
 
 class GasFeeOptimizer {
     constructor() {
         this.currentGasPrice = null;
         this.gasHistory = [];
         this.isRunning = false;
+        this.analyzer = new GasAnalyzer();
     }
 
     async fetchGasPrice() {
@@ -21,12 +23,17 @@ class GasFeeOptimizer {
             };
 
             this.gasHistory.push(this.currentGasPrice);
+            this.analyzer.addDataPoint(this.currentGasPrice);
             
             if (this.gasHistory.length > 100) {
                 this.gasHistory.shift();
             }
 
+            const recommendation = this.analyzer.predictOptimalTime();
+            const trend = this.analyzer.getTrend();
+
             console.log(`Current gas prices - Slow: ${this.currentGasPrice.slow}, Standard: ${this.currentGasPrice.standard}, Fast: ${this.currentGasPrice.fast}`);
+            console.log(`Trend: ${trend}, Recommendation: ${recommendation.recommendation}`);
             
         } catch (error) {
             console.error('Error fetching gas price:', error.message);
