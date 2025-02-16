@@ -1,10 +1,8 @@
-const GasFeeOptimizer = require('./src/optimizer');
+const CLI = require('./src/cli');
 
 async function main() {
-    console.log('Starting Gas Fee Optimizer...');
-    
-    const optimizer = new GasFeeOptimizer();
-    await optimizer.start();
+    const cli = new CLI();
+    await cli.start();
 }
 
 main().catch(console.error);
