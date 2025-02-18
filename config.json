@@ -1,0 +1,15 @@
+{
+  "etherscanApiKey": "YourApiKeyToken",
+  "monitoringInterval": 5,
+  "historyLimit": 288,
+  "gasThresholds": {
+    "low": 20,
+    "medium": 50,
+    "high": 100
+  },
+  "notifications": {
+    "enabled": false,
+    "threshold": 25
+  },
+  "timeZone": "UTC"
+}
