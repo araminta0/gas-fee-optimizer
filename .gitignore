@@ -7,3 +7,4 @@ CLAUDE.md
 dist/
 .DS_Store
 coverage/
+exports/
